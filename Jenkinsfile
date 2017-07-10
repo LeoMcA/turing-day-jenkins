@@ -1,21 +1,11 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                sh "echo 'build'"
-            }
-        }
-        stage('Test'){
-            steps {
-                sh "echo 'test'"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh "echo 'deploy'"
-            }
-        }
+  agent any
+  stages {
+    stage('Setup') {
+      steps {
+        git(url: 'https://github.com/discourse/discourse.git', changelog: true, branch: 'tests-passed')
+        sh 'ls .'
+      }
     }
+  }
 }
