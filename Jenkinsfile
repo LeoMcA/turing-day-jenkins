@@ -1,18 +1,12 @@
 pipeline {
-  agent {
-    node {
-      label 'mesos-production'
-    }
-    
-  }
+  agent any
   stages {
     stage('Setup') {
       steps {
-        sh '''ls .
-ls ../'''
-        git(url: 'https://github.com/discourse/discourse.git', branch: 'tests-passed')
-        sh '''ls .
-ls ../'''
+        sh '''docker run
+    -e "COMMIT_HASH=origin/tests-passed"
+    -e SKIP_JS=1
+    discourse/discourse_test:release'''
       }
     }
   }
