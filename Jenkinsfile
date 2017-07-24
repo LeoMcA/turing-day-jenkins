@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'discourse/discourse_dev:release'
+    node {
+      label 'mesos-production'
     }
     
   }
