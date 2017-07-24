@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'mesos-production'
+    }
+    
+  }
   stages {
     stage('Setup') {
       steps {
